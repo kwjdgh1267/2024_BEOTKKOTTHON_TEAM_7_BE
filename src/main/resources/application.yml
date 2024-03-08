@@ -10,7 +10,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/board?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/studymate?serverTimezone=Asia/Seoul
     username: root
     password:
 
@@ -21,34 +21,16 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
     generate-ddl: true
-#springdoc:
-#  packages-to-scan: com.colabear754.springdoc_example.controllers
-#  default-consumes-media-type: application/json;charset=UTF-8
-#  default-produces-media-type: application/json;charset=UTF-8
-#  swagger-ui:
-#    path: /
-#    disable-swagger-default-url: true
-#    display-request-duration: true
-#    operations-sorter: alpha
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          google:
-#            client-id: 113402694110-9kpqdal2ecqo4bu4h9emk3j08elp82p8.apps.googleusercontent.com
-#            client-secret: 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
-#            redirect-uri: http://localhost:8080/login/oauth2/code/google
-#            token-uri: https://oauth2.googleapis.com/token
-#            resource-uri: https://www.googleapis.com/oauth2/v2/userinfo
-#            scope:
-#              - email
-#              - profile
-
-oauth2:
-  google:
-    client-id:
-    client-secret:
-    redirect-uri: http://localhost:8080/login/oauth2/code/google
-    token-uri: https://oauth2.googleapis.com/token
-    resource-uri: https://www.googleapis.com/oauth2/v2/userinfo
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id:
+            client-secret:
+            scope:
+              - email
+              - profile
+  profiles:
+    include: oauth
 
