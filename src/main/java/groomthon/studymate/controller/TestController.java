@@ -20,7 +20,7 @@ public class TestController {
 
     @GetMapping("/getimage")
     public String getimage(@AuthenticationPrincipal OAuth2User user){
-        return user.getAttribute("picture");
+        return user.getAttributes().toString();
     }
 
 
