@@ -18,7 +18,12 @@ public class SecurityConfig {
         http.headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(frameOptionsConfig -> frameOptionsConfig.disable()));
         http.authorizeHttpRequests(
                 authorize -> authorize
-                        .requestMatchers("/member/join").permitAll()
+                        .requestMatchers("/h2-console/**",
+                                "/favicon.ico",
+                                "/error",
+                                "/swagger-ui/**",
+                                "/swagger-resources/**",
+                                "/v3/api-docs/**").permitAll()
                         .requestMatchers("/auth/login").permitAll()
                         .anyRequest().authenticated()
         );
