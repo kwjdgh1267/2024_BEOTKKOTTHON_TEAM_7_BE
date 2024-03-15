@@ -3,7 +3,6 @@ package groomthon.studymate.config.auth;
 import groomthon.studymate.config.auth.jwt.JwtAuthFilter;
 import groomthon.studymate.config.auth.jwt.TokenService;
 import groomthon.studymate.repository.UserRepository;
-import groomthon.studymate.service.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

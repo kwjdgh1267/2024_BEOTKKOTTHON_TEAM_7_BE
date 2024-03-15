@@ -1,4 +1,4 @@
-package groomthon.studymate.service;
+package groomthon.studymate.config.auth;
 
 import lombok.AccessLevel;
 import lombok.Builder;

@@ -12,11 +12,11 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/studymate?serverTimezone=Asia/Seoul
     username: root
-    password:
+    password: 1267
 
   jpa:
     hibernate:
-      ddl-auto: update #create update none
+      ddl-auto: create #create update none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
@@ -27,8 +27,8 @@ spring:
       client:
         registration:
           google:
-            client-id:
-            client-secret:
+            client-id: 113402694110-9kpqdal2ecqo4bu4h9emk3j08elp82p8.apps.googleusercontent.com
+            client-secret: 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
             scope:
               - email
               - profile

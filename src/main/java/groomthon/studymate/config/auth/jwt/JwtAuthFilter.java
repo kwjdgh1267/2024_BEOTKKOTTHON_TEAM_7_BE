@@ -1,6 +1,7 @@
 package groomthon.studymate.config.auth.jwt;
 
 import groomthon.studymate.dto.UserDto;
+import groomthon.studymate.entity.Role;
 import groomthon.studymate.entity.User;
 import groomthon.studymate.repository.UserRepository;
 import jakarta.servlet.FilterChain;
@@ -37,6 +38,7 @@ public class JwtAuthFilter extends GenericFilterBean {
                     .email(email)
                     .name(foundUser.getName())
                     .picture(foundUser.getPicture())
+                    .role(Role.MENTEE)
                     .build();
 
             Authentication auth = getAuthentication(userDto);

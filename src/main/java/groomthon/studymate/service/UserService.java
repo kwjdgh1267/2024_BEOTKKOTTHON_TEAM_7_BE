@@ -19,11 +19,11 @@ public class UserService {
 
     public String findMyInfo(Authentication authentication) {//정상 작동되면 dto 대신 principal써보자
         UserDto userDto = (UserDto) authentication.getPrincipal();
-        return userDto.getEmail()+userDto.getPicture();
+        return userDto.getEmail()+userDto.getPicture()+userDto.getRole().getKey();
     }
     @Transactional
     public User createUser(UserDto dto){
-        return userRepository.save(User.builder().email(dto.getEmail()).name(dto.getName()).picture(dto.getPicture()).role(Role.GUEST).build());
+        return userRepository.save(User.builder().email(dto.getEmail()).name(dto.getName()).picture(dto.getPicture()).role(Role.MENTEE).build());
     }
     public User findByEmail(String email){
         return userRepository.findByEmail(email).orElse(null);

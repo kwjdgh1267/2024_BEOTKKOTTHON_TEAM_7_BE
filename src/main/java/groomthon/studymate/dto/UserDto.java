@@ -11,11 +11,13 @@ public class UserDto {
     private String email;
     private String name;
     private String picture;
+    private Role role;
 
     @Builder
-    public UserDto(String email, String name, String picture) {
+    public UserDto(String email, String name, String picture, Role role) {
         this.email = email;
         this.name = name;
         this.picture = picture;
+        this.role=role;
     }
 }
