@@ -12,7 +12,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/studymate?serverTimezone=Asia/Seoul
     username: root
-    password: 1267
+    password:
 
   jpa:
     hibernate:
@@ -27,8 +27,8 @@ spring:
       client:
         registration:
           google:
-            client-id: 113402694110-9kpqdal2ecqo4bu4h9emk3j08elp82p8.apps.googleusercontent.com
-            client-secret: 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
+            client-id:
+            client-secret:
             scope:
               - email
               - profile
