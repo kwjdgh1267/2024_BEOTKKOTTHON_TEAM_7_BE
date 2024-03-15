@@ -18,6 +18,7 @@ public class User {
     @GeneratedValue
     @Column(name = "user_id")
     private Long id;
+
     @OneToMany(mappedBy = "user")
     private List<Heart> hearts = new ArrayList<>();
 
@@ -58,6 +59,4 @@ public class User {
     public String getRoleKey() {
         return this.role.getKey();
     }
-
-
 }

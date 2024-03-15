@@ -35,5 +35,4 @@ public class ImageController { //https://velog.io/@mooh2jj/SpringBoot-File-uploa
                 .contentType(MediaType.valueOf("image/png"))
                 .body(downloadImage);
     }
-
 }
