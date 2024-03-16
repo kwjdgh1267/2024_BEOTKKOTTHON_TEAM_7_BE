@@ -25,6 +25,7 @@ public class StudyService {
     private final StudyRepository studyRepository;
     private final UserRepository userRepository;
     private final UserStudyRepository userStudyRepository;
+    private final UserStudyService userStudyService;
 
     public StudyResponseDto createStudy(Authentication authentication, StudyRequestDto studyRequestDto) {
         UserDto userDto = (UserDto) authentication.getPrincipal();
@@ -44,18 +45,23 @@ public class StudyService {
         userStudy.setUser(foundUser);
 
 
-
-        //나중에 서비스로 옮길거임
-        //UserStudy 테이블에서 해당 스터디 아이디에 맞는거를 다 가져오고
-        List<UserStudy> found = userStudyRepository.findByStudyId(savedStudy.getId());
-        List<User> users= new ArrayList<>();
-        for(UserStudy tempUserStudy: found){
-            users.add(userRepository.findById(tempUserStudy.getUser().getId()).get());
-        }
+        List<User> users = userStudyService.getUserListByStudyId(savedStudy.getId());
 
         return new StudyResponseDto(savedStudy.getId(), savedStudy.getTitle(), savedStudy.getContents(),
                 savedStudy.getSubject(),savedStudy.getRecruitNum(), savedStudy.isComplete(), savedStudy.getFrequency(), savedStudy.getWriter(),
                 users.stream().map(user -> User.toUserResDto(user)).collect(Collectors.toList()));
 
+    }
+
+    public List<StudyResponseDto> findAllStudy(boolean cond) {//0은 모집 덜된거 1은 다된거임
+        List<Study> studies = studyRepository.findAllByComp(false);
+        List<StudyResponseDto> temp = new ArrayList<>();
+        for(Study tempStudy:studies){
+            List<User> users = userStudyService.getUserListByStudyId(tempStudy.getId());
+            temp.add(new StudyResponseDto(tempStudy.getId(), tempStudy.getTitle(), tempStudy.getContents(),
+                    tempStudy.getSubject(),tempStudy.getRecruitNum(), tempStudy.isComplete(), tempStudy.getFrequency(), tempStudy.getWriter(),
+                    users.stream().map(user -> User.toUserResDto(user)).collect(Collectors.toList())));
+        }
+        return temp;
     }
 }
