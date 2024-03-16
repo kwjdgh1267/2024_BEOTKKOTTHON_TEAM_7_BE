@@ -27,13 +27,16 @@ spring:
       client:
         registration:
           google:
-            client-id:
-            client-secret:
+            client-id: 113402694110-9kpqdal2ecqo4bu4h9emk3j08elp82p8.apps.googleusercontent.com
+            client-secret: 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
+            # 프론트랑 할 때
+#            client-id: 214256759740-8tgs7481av48a022sarg2o38mvl1u303.apps.googleusercontent.com
+#            client-secret: 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
             scope:
               - email
               - profile
             redirect-uri: http://localhost:8080/login/oauth2/code/google #이게 맞다
 jwt:
   header: Authorization
-  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  secret:
 #  token-validity-in-seconds: 86400

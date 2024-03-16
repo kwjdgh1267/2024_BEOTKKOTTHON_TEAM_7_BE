@@ -24,6 +24,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.httpBasic(httpSecurityHttpBasicConfigurer -> httpSecurityHttpBasicConfigurer.disable());
         http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
+        http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.disable());
         http.sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
 
@@ -35,9 +36,10 @@ public class SecurityConfig {
                                 "/error",
                                 "/swagger-ui/**",
                                 "/swagger-resources/**",
-                                "/v3/api-docs/**","/token/**","/login/**","/oauth/google").permitAll()
+                                "/v3/api-docs/**","/token/**","/login/**","/oauth/google","/login/oauth2/code").permitAll()
                         .requestMatchers("/mytest/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/user/**").authenticated()
+                        .anyRequest().permitAll()
         );
 //        http.oauth2Login((oa->oa.loginPage("/token/expired")));
 //        http.oauth2Login(oa->oa.defaultSuccessUrl("/test"));

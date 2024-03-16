@@ -1,5 +1,6 @@
-package groomthon.studymate.dto;
+package groomthon.studymate.config.auth;
 
+import groomthon.studymate.dto.UserDto;
 import groomthon.studymate.entity.Role;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
