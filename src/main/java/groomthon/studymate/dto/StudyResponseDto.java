@@ -30,6 +30,10 @@ public class StudyResponseDto {
 
     private String writer;
 
+    private int nowNum;
+
     private List<UserResponseDto> users;
+
+
 
 }

@@ -3,13 +3,11 @@ package groomthon.studymate.controller;
 import groomthon.studymate.dto.StudyRequestDto;
 import groomthon.studymate.dto.StudyResponseDto;
 import groomthon.studymate.service.StudyService;
+import groomthon.studymate.service.UserStudyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudyController {
     private final StudyService studyService;
+    private final UserStudyService userStudyService;
 
     //스터디 작성
     @PostMapping("/user/study/write")
@@ -28,7 +27,17 @@ public class StudyController {
     public List<StudyResponseDto> findAllStudy(){
         return studyService.findAllStudy(false);
     }
+    //스터디 하나 조회
+    @GetMapping("/study/{study_id}")
+    public StudyResponseDto findOneStudy(@PathVariable("study_id") Long study_id){
+        return studyService.findOneStudy(study_id);
+    }
 
     //스터디 참가
+    @GetMapping("/user/study/{study_id}/write")
+    public String joinStudy(Authentication authentication, @PathVariable("study_id") Long study_id){
+        return userStudyService.joinStudy(authentication,study_id);
+
+    }
 
 }

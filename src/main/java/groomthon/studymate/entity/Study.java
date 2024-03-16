@@ -53,6 +53,11 @@ public class Study extends BaseEntity{
     @Column
     private String writer;
 
+    @Column
+    private int nowNum;
+
+
+
     public Study(String title, String contents, Subject subject, long recruitNum, boolean isCompleted, Frequency frequency,String email) {
         this.title = title;
         this.contents = contents;
@@ -61,6 +66,7 @@ public class Study extends BaseEntity{
         this.complete = isCompleted;
         this.frequency = frequency;
         this.writer=email;
+        this.nowNum=0;
     }
 
 

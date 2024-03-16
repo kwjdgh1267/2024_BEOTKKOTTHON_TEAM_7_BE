@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,6 +33,7 @@ public class StudyService {
         //스터디 생성
         Study newStudy= new Study(studyRequestDto.getTitle(),studyRequestDto.getContents(),
                 studyRequestDto.getSubject(),studyRequestDto.getRecruitNum(),false,studyRequestDto.getFrequency(), userDto.getEmail());
+        newStudy.setNowNum(1);
         Study savedStudy = studyRepository.save(newStudy);
         //로그인한 정보로 현재 유저 불러오기
         User foundUser= userRepository.findByEmail(userDto.getEmail()).get();
@@ -47,9 +49,7 @@ public class StudyService {
 
         List<User> users = userStudyService.getUserListByStudyId(savedStudy.getId());
 
-        return new StudyResponseDto(savedStudy.getId(), savedStudy.getTitle(), savedStudy.getContents(),
-                savedStudy.getSubject(),savedStudy.getRecruitNum(), savedStudy.isComplete(), savedStudy.getFrequency(), savedStudy.getWriter(),
-                users.stream().map(user -> User.toUserResDto(user)).collect(Collectors.toList()));
+        return changer(savedStudy,users);
 
     }
 
@@ -58,10 +58,24 @@ public class StudyService {
         List<StudyResponseDto> temp = new ArrayList<>();
         for(Study tempStudy:studies){
             List<User> users = userStudyService.getUserListByStudyId(tempStudy.getId());
-            temp.add(new StudyResponseDto(tempStudy.getId(), tempStudy.getTitle(), tempStudy.getContents(),
-                    tempStudy.getSubject(),tempStudy.getRecruitNum(), tempStudy.isComplete(), tempStudy.getFrequency(), tempStudy.getWriter(),
-                    users.stream().map(user -> User.toUserResDto(user)).collect(Collectors.toList())));
+            temp.add(changer(tempStudy,users));
         }
         return temp;
     }
+
+    public StudyResponseDto findOneStudy(Long studyId) {
+        Study foundStudy = studyRepository.findById(studyId).orElse(null);
+        List<User> users = userStudyService.getUserListByStudyId(foundStudy.getId());
+
+        return changer(foundStudy,users);
+
+    }
+
+    public StudyResponseDto changer(Study study,List<User> users){
+        return new StudyResponseDto(study.getId(), study.getTitle(), study.getContents(),
+                study.getSubject(),study.getRecruitNum(), study.isComplete(), study.getFrequency(), study.getWriter(), study.getNowNum(),
+                users.stream().map(user -> User.toUserResDto(user)).collect(Collectors.toList()));
+    }
+
+
 }
